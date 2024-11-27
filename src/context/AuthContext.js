@@ -10,7 +10,6 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const router = useRouter();
 
-  // Recupera o estado de autenticação do localStorage
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {

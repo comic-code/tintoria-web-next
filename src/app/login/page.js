@@ -3,9 +3,14 @@ import ThemeToggle from "@/components/ThemeToggle";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import { getConnection } from "@/services/api";
+import Loading from "@/components/Loading";
+import { useGlobal } from "@/context/Global";
 
 export default function Login() {
   const { login } = useAuth();
+  const { setIsLoading, isLoading } = useGlobal();
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -14,12 +19,23 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (email === "bitotajima@hotmail.com" && password === "123") {
-      login({ email });
-      router.push("/dashboard");
-    } else {
-      setError("Credenciais inválidas");
-    }
+    // if (email === "bitotajima@hotmail.com" && password === "123") {
+    //   login({ email });
+    //   router.push("/dashboard");
+    // } else {
+    //   setError("Credenciais inválidas");
+    // }
+    setIsLoading(true);
+    getConnection('2403beb8662d008c').then(json => {
+      setIsLoading(false);
+      if(json.error) {
+        setError('Credenciais inválidas');
+      } else {
+        console.log(json);
+        login({ email, ...json.data });
+        router.push("/dashboard");
+      }
+    })
   };
 
   return (
@@ -70,10 +86,12 @@ export default function Login() {
             />
           </div>
           <button
+
             type="submit"
             className="font-bold w-full py-2 px-4 bg-[var(--primary)] text-white rounded-md hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
           >
-            Entrar
+            {isLoading ? <Loading alt/> : 'Entrar'}
+            
           </button>
         </form>
       </div>

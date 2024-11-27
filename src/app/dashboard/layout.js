@@ -11,7 +11,7 @@ export default function DashboardLayout({ children }) {
       {/* Menu Lateral */}
       <aside className="w-64 bg-[var(--foreground)] dark:bg-[var(--foreground-dark)] text-white">
         <div className="flex justify-between items-center p-4">
-          <h2 className="text-2xl font-bold text-black dark:text-white">Tintoria</h2>
+          <Link className="text-2xl font-bold text-black dark:text-white cursor-pointer" href="/dashboard">Tintoria</Link>
           <button
             onClick={logout}
             className="bg-gray-700 p-2 rounded-md text-white hover:bg-gray-600"

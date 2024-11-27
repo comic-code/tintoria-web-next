@@ -1,10 +1,12 @@
 'use client';
 import { createContext, useContext, useState, useEffect } from "react";
 
-const ThemeContext = createContext();
+const GlobalContext = createContext();
 
-export function ThemeProvider({ children }) {
+export function GlobalProvider({ children }) {
   const [theme, setTheme] = useState("light");
+  const [annualCharts, setAnnualCharts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
@@ -21,12 +23,12 @@ export function ThemeProvider({ children }) {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <GlobalContext.Provider value={{ theme, toggleTheme, isLoading, setIsLoading, annualCharts, setAnnualCharts }}>
       {children}
-    </ThemeContext.Provider>
+    </GlobalContext.Provider>
   );
 }
 
-export function useTheme() {
-  return useContext(ThemeContext);
+export function useGlobal() {
+  return useContext(GlobalContext);
 }
