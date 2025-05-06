@@ -16,8 +16,6 @@ export default function DashboardHome() {
   });
   const [annualRevenue, setAnnualRevenue] = useState(null);
 
-
-
   useEffect(() => {
     if (user?.dbp) {
       setIsLoading(true);

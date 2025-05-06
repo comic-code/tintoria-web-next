@@ -25,21 +25,26 @@ export default function Login() {
     // } else {
     //   setError("Credenciais inválidas");
     // }
-    setIsLoading(true);
-    getConnection('2403beb8662d008c').then(json => {
-      setIsLoading(false);
-      if(json.error) {
-        setError('Credenciais inválidas');
-      } else {
-        console.log(json);
-        login({ email, ...json.data });
-        router.push("/dashboard");
-      }
-    })
+    if(email === "eduardohrafael@gmail.com" && password === "123") {
+      setIsLoading(true);
+      getConnection('2403beb8662d008c').then(json => {
+        setIsLoading(false);
+        if(json.error) {
+          console.log(json);
+          setError('Credenciais inválidas');
+        } else {
+          console.log(json);
+          login({ email, ...json.data });
+          router.push("/dashboard");
+        }
+      })
+    } else {
+      setError("Credenciais inválidas");
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background dark:bg-[var(--background)]">
+    <div className="min-h-screen flex items-center justify-center bg-background dark:bg-[var(--background)]" suppressHydrationWarning>
       <div className="bg-[var(--foreground)] dark:bg-[var(--foreground)] shadow-lg rounded-lg p-8 max-w-sm w-full">
         <h1 className="text-2xl font-bold text-center text-black dark:text-white mb-4">
           Tintoria

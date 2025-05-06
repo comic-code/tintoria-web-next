@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl =  'http://tintoria.net.br/ws';
+const baseUrl =  'http://tintoria.net.br/api';
 
 export async function defaultRequest(request) {
 	const xmls = `<?xml version="1.0" encoding="UTF-8"?>

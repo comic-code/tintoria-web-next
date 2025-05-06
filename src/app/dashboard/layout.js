@@ -41,6 +41,11 @@ export default function DashboardLayout({ children }) {
                 Relatórios
               </Link>
             </li>
+            <li>
+              <Link href="/dashboard/permissoes" className="block px-4 py-2 text-black dark:text-white border-l-2 border-[var(--primary)] ml-1 mb-1">
+                Permissões
+              </Link>
+            </li>
           </ul>
         </nav>
       </aside>
