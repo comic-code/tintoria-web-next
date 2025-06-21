@@ -86,9 +86,9 @@ export async function getDebit(gdb, dbp, client, entryDate1, entryDate2, exitDat
 }
 
 export async function getAnnualInvoice(gdb, dbp) {  
-  let xmls = `<m:BOSS_getFaturamentoAnualJSON xmlns:m="${baseUrl}/BOSS_getFaturamentoAnualJSON">
+  let xmls = `<m:BOSS_getFaturamentoGroupByDataJSON xmlns:m="${baseUrl}/BOSS_getFaturamentoGroupByDataJSON">
 		<gdb>${gdb}</gdb>
 		<dbp>${dbp}</dbp>
-  </m:BOSS_getFaturamentoAnualJSON>`
+  </m:BOSS_getFaturamentoGroupByDataJSON>`
   return defaultRequest(xmls);
 }

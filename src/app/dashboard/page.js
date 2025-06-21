@@ -14,7 +14,7 @@ export default function DashboardHome() {
     actives: '',
     inactives: '',
   });
-  const [annualRevenue, setAnnualRevenue] = useState(null);
+  const [annualRevenue, setAnnualRevenue] = useState([]);
 
   useEffect(() => {
     if (user?.dbp) {
@@ -46,19 +46,11 @@ export default function DashboardHome() {
 
           if (annualRevenueResponse.error) {
             ErrorAlert("Falha ao carregar dados de Faturamento Anual!");
+
           } else {
-            if (annualRevenueResponse.data.arrFaturamento.length) {
-              setAnnualCharts(annualRevenueResponse.data.arrFaturamento);
-              setAnnualRevenue(
-                new Intl.NumberFormat("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                }).format(
-                  annualRevenueResponse.data.arrFaturamento[
-                    annualRevenueResponse.data.arrFaturamento.length - 1
-                  ].TOTAL
-                )
-              );
+            if (annualRevenueResponse.data.arrPeriodo.length) {
+              // setAnnualCharts(annualRevenueResponse.data.arrFaturamento);
+              setAnnualRevenue(annualRevenueResponse.data.arrPeriodo.slice().reverse());
             } else {
               InfoAlert("Sem dados de faturamento!");
             }
@@ -95,12 +87,9 @@ export default function DashboardHome() {
         />
 
         <DashboardCard
-          title="Faturamento Anual"
+          title="Faturamento"
           isLoading={isLoading}
-          content={{
-            value: annualRevenue || "R$ 0,00",
-            href: "/dashboard/faturamento"
-          }}
+          content={annualRevenue}
         />
       </section>
     </section>
